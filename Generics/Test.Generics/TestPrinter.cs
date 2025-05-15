@@ -30,6 +30,13 @@ namespace Test.Generics
             Assert.Equal("Hello", result);
         }
 
-    }
+        [Fact]
+        public void GetOrDefault_SHouldReturnBoolValue()
+        {
+            var printer = new Printer();
+            var result = printer.GetOrDefault<bool>(true);
+            Assert.True(result);
+        }
+
     }
 }
