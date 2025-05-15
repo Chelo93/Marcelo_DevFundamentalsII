@@ -18,7 +18,10 @@ namespace Test.Generics
         public void Repository_GetInvalidId_ShouldReturnDefault()
         {
             // TODO: Complete the test
-            // Assert.Null(result);
+            var repository = new MemoryRepository<string>();
+            repository.Add("Item1");
+            var result = repository.Find(2);
+            Assert.Null(result);
         }
     }
 
