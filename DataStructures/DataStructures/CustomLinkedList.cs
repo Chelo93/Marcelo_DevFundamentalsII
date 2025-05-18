@@ -3,15 +3,10 @@
     // LinkedList
     public class CustomLinkedList<T> where T : IEquatable<T>
     {
-        private class Node
+        private class Node(T value)
         {
-            public T Value { get; set; }
+            public T Value { get; set; } = value;
             public Node? Next { get; set; } = null!;
-
-            public Node(T value)
-            {
-                Value = value;
-            }
         }
 
         private Node? _head;
@@ -131,7 +126,12 @@
         {
             var result = new T[_count];
             // TODO: Turn to array the linked list
-
+            var current = _head;
+            for (int i = 0; i < _count; i++)
+            {
+                result[i] = current!.Value;
+                current = current.Next;
+            }
             return result;
         }
     }

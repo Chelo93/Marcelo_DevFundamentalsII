@@ -20,6 +20,7 @@ namespace DataStructures
         private Node? _head;
         private Node? _tail;
         private int _count;
+        public int Count => _count;
 
         public void AddFirst(T value)
         {
@@ -97,7 +98,7 @@ namespace DataStructures
         // TODO: Modify using _tail
         public bool Contains(T value)
         {
-            var current = _head;
+            var current = _tail;
 
             while (current != null)
             {
@@ -106,7 +107,7 @@ namespace DataStructures
                     return true;
                 }
 
-                current = current.Next;
+                current = current.Prev;
             }
 
             return false;
@@ -120,11 +121,12 @@ namespace DataStructures
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
 
-            var current = _head;
+            var current = _tail;
+            index = _count - index - 1;
 
-            for (int i = 0; i < index; i++)
+            for (int i = index; i > 0; i--)
             {
-                current = current!.Next;
+                current = current!.Prev;
             }
 
             return current!.Value;
@@ -135,6 +137,12 @@ namespace DataStructures
         {
             var result = new T[_count];
             // Turn to array the linked list
+            var current = _head;
+            for (int i = 0; i < _count; i++)
+            {
+                result[i] = current!.Value;
+                current = current.Next;
+            }
 
             return result;
         }
@@ -144,7 +152,12 @@ namespace DataStructures
         {
             var result = new T[_count];
             // Turn to array the linked list but start from the tail
-
+            var current = _tail;
+            for (int i = 0; i < _count; i++)
+            {
+                result[i] = current!.Value;
+                current = current.Prev;
+            }
             return result;
         }
     }

@@ -103,10 +103,10 @@
             list.AddLast("Fabricio");
 
             // TODO: Uncomment
-            // var array = list.ToArray();
+            var array = list.ToArray();
 
-            // Assert.NotNull(array);
-            // Assert.Equal(new[] { "Carlos", "Sergio", "Fabricio" }, array);
+            Assert.NotNull(array);
+            Assert.Equal(["Carlos", "Sergio", "Fabricio"], array);
         }
     }
 }

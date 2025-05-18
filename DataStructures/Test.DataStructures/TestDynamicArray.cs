@@ -19,14 +19,15 @@ namespace Test.DataStructures
             Assert.Equal(30, dynamicArray.Get(2));
         }
 
-        [Fact]
-        public void Get_ShouldThrow_WhenIndexOutOfBound()
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(1)]
+        public void Get_ShouldThrow_WhenIndexOutOfBound(int index)
         {
             var dynamicArray = new DynamicArray<string>(10);
             dynamicArray.Add("hello");
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => dynamicArray.Get(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => dynamicArray.Get(1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => dynamicArray.Get(index));
         }
 
         [Fact]
@@ -35,7 +36,7 @@ namespace Test.DataStructures
             var dynamicArray = new DynamicArray<string>();
             dynamicArray.Add("Jose");
             var oldCount = dynamicArray.Count;
-            
+
             dynamicArray.Set(0, "Cristian");
             var newCount = dynamicArray.Count;
 
@@ -58,15 +59,16 @@ namespace Test.DataStructures
             Assert.Equal("Jessica", dynamicArray.Get(2));
         }
 
-        [Fact]
-        public void InsertAt_ShouldThrow_WhenOutOfRange()
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(3)]
+        public void InsertAt_ShouldThrow_WhenOutOfRange(int index)
         {
             var dynamicArray = new DynamicArray<int>();
             dynamicArray.Add(1);
             dynamicArray.Add(2);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => dynamicArray.InsertAt(-1, 23));
-            Assert.Throws<ArgumentOutOfRangeException>(() => dynamicArray.InsertAt(3, 23));
+            Assert.Throws<ArgumentOutOfRangeException>(() => dynamicArray.InsertAt(index, 23));
         }
 
         [Theory]
@@ -80,5 +82,34 @@ namespace Test.DataStructures
 
             Assert.Throws<ArgumentOutOfRangeException>(() => dynamicArray.RemoveAt(index));
         }
+
+        [Fact]
+        public void RemoveAt_ShouldRemoveCorrectly()
+        {
+            var dynamicArray = new DynamicArray<string>();
+            dynamicArray.Add("Marcelo");
+            dynamicArray.Add("Alison");
+            dynamicArray.Add("Mateo");
+
+            dynamicArray.RemoveAt(1);
+
+            Assert.Equal(2, dynamicArray.Count);
+            Assert.Equal("Marcelo", dynamicArray.Get(0));
+            Assert.Equal("Mateo", dynamicArray.Get(1));
+        }
+
+        [Fact]
+        public void DynamicArray_EnsureCapacity()
+        {
+            var dynamicArray = new DynamicArray<string>(1);
+            dynamicArray.Add("Jose");
+            dynamicArray.Add("Cristian");
+            dynamicArray.Add("Jessica");
+            // When
+            var Capacity = dynamicArray.Capacity;
+            // Then
+            Assert.True(Capacity == 4);
+        }
+
     }
 }
