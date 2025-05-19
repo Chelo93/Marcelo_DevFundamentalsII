@@ -55,8 +55,14 @@
         public T[] ToArray()
         {
             // TODO: Convertir a array
-
-            return default!;
+            var array = new T[_count];
+            var current = _top;
+            for (int i = 0; i < _count; i++)
+            {
+                array[i] = current!.Value;
+                current = current.Next;
+            }
+            return array;
         }
     }
 }
