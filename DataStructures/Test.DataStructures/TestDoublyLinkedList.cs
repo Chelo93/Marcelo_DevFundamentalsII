@@ -91,11 +91,11 @@
 
             Assert.True(result);
             Assert.Equal(2, list.Count);
-            Assert.Equal(['A','C'], list.ToArray());
+            Assert.Equal(['A', 'C'], list.ToArray());
         }
 
         [Fact]
-        public void Remove_ShouldReturnFalseIfNotFound()
+        public void TryRemove_ShouldReturnFalseIfNotFound()
         {
             // TODO: Complete test
             var list = new DoublyLinkedList<char>();
@@ -107,9 +107,34 @@
 
             Assert.False(result);
             Assert.Equal(3, list.Count);
-            Assert.Equal(['A','B','C'], list.ToArray());
+            Assert.Equal(['A', 'B', 'C'], list.ToArray());
         }
 
         // OPTIONAL: Add more tests if wanted
+        [Fact]
+        public void ToArray_ShouldReturnCorrectOrder()
+        {
+            var list = new DoublyLinkedList<int>();
+            list.AddLast(1);
+            list.AddLast(2);
+            list.AddLast(3);
+
+            var array = list.ToArray();
+            Assert.Equal([1, 2, 3], array);
+        }
+
+        [Fact]
+        public void InsertAt_ShouldInsertAtCorrectPosition()
+        {
+            var list = new DoublyLinkedList<int>();
+            list.AddLast(1);
+            list.AddLast(3);
+            list.AddLast(4);
+            list.InsertAt(1, 2);
+
+            var result = list.ToArray();
+            Assert.Equal([1, 2, 3, 4], result);
+        }
+
     }
 }

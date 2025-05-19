@@ -160,5 +160,39 @@ namespace DataStructures
             }
             return result;
         }
+
+        public void InsertAt(int index, T value)
+        {
+            if (index < 0 || index > _count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+
+            var newNode = new Node(value);
+
+            if (index == 0)
+            {
+                AddFirst(value);
+            }
+            else if (index == _count)
+            {
+                AddLast(value);
+            }
+            else
+            {
+                var current = _head;
+                for (int i = 0; i < index - 1; i++)
+                {
+                    current = current!.Next;
+                }
+
+                newNode.Next = current!.Next;
+                newNode.Prev = current;
+                current.Next = newNode;
+                current.Next.Prev = newNode;
+
+                _count++;
+            }
+        }  
     }
 }
