@@ -1,4 +1,7 @@
-﻿namespace ProblemSolving
+﻿
+using System.Text.RegularExpressions;
+
+namespace ProblemSolving
 {
     /// <summary>
     /// Given a string represeting a paragraph, find the first word
@@ -14,9 +17,27 @@
     /// Output:
     /// "this"
     /// 
-    /// Best data structure
+    /// Best data structure:
+    /// Queue, because you need to track the order of the words.
     /// </summary>
-    public class FindTheFirstRepeatedWordProblem
+    public static class FindTheFirstRepeatedWordProblem
     {
+        public static string FindFirstRepeatedWord(string paragraph)
+        {
+           
+            var matches = Regex.Matches(paragraph, @"[A-Za-z0-9]+");
+            var seenWords = new Queue<string>();
+            
+            foreach (Match match in matches)
+            {
+                string word = match.Value.ToLower();
+                if (seenWords.Contains(word))
+                {
+                    return word;
+                }
+                seenWords.Enqueue(word);
+            }      
+            return null!; 
+        }
     }
 }
