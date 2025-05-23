@@ -59,7 +59,6 @@ namespace Exam1.SingleResponsability {
             // 1. Inline order data
             var orders = InititiateOrderService();
 
-
             foreach (var order in orders)
             {
                 // 2. Validate each order
@@ -69,10 +68,9 @@ namespace Exam1.SingleResponsability {
                 // 4. Add to processed list
                 AddOrder(order);
             }
-
-            // 6. “Send” report by printing to console
+            // 5. “Send” report by printing to console
             Console.WriteLine(GetOrderReport());
-            // 7. Clear logs for next run
+            // 6. Clear logs for next run
             LogsClear();
         }
     }
