@@ -18,7 +18,7 @@ namespace Exam1
             evaluator.Undo();
             Console.WriteLine(evaluator.Evaluate()); // Output: 8
 
-//--------------------------------------------------------------
+            //--------------------------------------------------------------
             var printServer = new PrintServer(new[] { "Printer1", "Printer2", "Printer3" });
             printServer.EnqueueJob("Job1");
             printServer.EnqueueJob("Job2");
@@ -28,6 +28,26 @@ namespace Exam1
             printServer.AssignNext();
             printServer.CompleteJob("Printer1");
             printServer.Status(); // Displays the status of waiting jobs and printers
+
+            //--------------------------------------------------------------
+
+            var browserHistory = new BrowserHistory("www.initialpage.com");
+            browserHistory.GoTo("www.page1.com");
+            browserHistory.GoTo("www.page2.com");
+            Console.WriteLine(browserHistory.CurrentPage()); // Output: www.page2.com
+            browserHistory.Back();
+            Console.WriteLine(browserHistory.CurrentPage()); // Output: www.page1.com
+            browserHistory.Forward();
+            browserHistory.Forward();
+            Console.WriteLine(browserHistory.CurrentPage()); // Output: www.page2.com
+            browserHistory.GoTo("www.page3.com");
+            Console.WriteLine(browserHistory.CurrentPage()); // Output: www.page3.com
+            browserHistory.Back();
+            Console.WriteLine(browserHistory.CurrentPage()); // Output: www.page2.com
+            browserHistory.Back();
+            browserHistory.Back();
+            browserHistory.Back();
+            Console.WriteLine(browserHistory.CurrentPage()); // Output: www.initialpage.com
         }
         
 
