@@ -9,9 +9,13 @@ public class ProductExportCli(IExporterFactory exporterFactory)
 
   public void Run(string[] args)
   {
-    var format = args.FirstOrDefault() ?? "json";
+    var format = args.FirstOrDefault() ?? "json"; 
     var products = SampleData();
     // TODO: Implement format type validation
+    if(!Enum.TryParse<FormatType>(format, true, out _))
+    {
+      throw new NotSupportedException($"Invalid format type: {format}. Supported formats are: json, xml, csv, Yaml.");
+    }
     var output = _exporterFactory.Export(products, Enum.Parse<FormatType>(format, true));
     Console.WriteLine(output);
   }
