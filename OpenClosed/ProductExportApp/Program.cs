@@ -11,6 +11,7 @@ services.AddSingleton<IProductExporter, JsonExporter>();
 services.AddSingleton<IProductExporter, CsvExporter>();
 services.AddSingleton<IProductExporter, XmlExporter>();
 // TODO: Add exporter for YAML format
+services.AddSingleton<IProductExporter, YamlExporter>();
 services.AddSingleton<IExporterFactory, ExporterFactory>();
 services.AddSingleton<ProductExportCli>();
 
