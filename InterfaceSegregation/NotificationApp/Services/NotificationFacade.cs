@@ -16,20 +16,21 @@ public class NotificationFacade(IEmailSender email, ISmsSender sms, IPushSender 
     var subject = $"Order #{orderEvent.OrderId} status: {orderEvent.Status}";
     var body = $"Hi {orderEvent.Customer}, your order is now {orderEvent.Status}";
 
-    // TODO: Enhance this calls
-    if (orderEvent.NotifyEmail)
-    {
-      _emailSender.SendEmail(orderEvent.CustomerEmail, subject, body);
-    }
+    //TODO: enhance these calls
+    var notificationActions = new List<Action>();
 
-    if (orderEvent.NotifySms)
-    {
-      _smsSender.SendSms(orderEvent.CustomerPhone, body);
-    }
+    if (orderEvent.NotifyEmail && !string.IsNullOrWhiteSpace(orderEvent.CustomerEmail))
+        notificationActions.Add(() => _emailSender.SendEmail(orderEvent.CustomerEmail, subject, body));
 
-    if (orderEvent.NotifyPush)
+    if (orderEvent.NotifySms && !string.IsNullOrWhiteSpace(orderEvent.CustomerPhone))
+        notificationActions.Add(() => _smsSender.SendSms(orderEvent.CustomerPhone, body));
+
+    if (orderEvent.NotifyPush && !string.IsNullOrWhiteSpace(orderEvent.DeviceToken))
+        notificationActions.Add(() => _pushSender.SendPush(orderEvent.DeviceToken, "Order Update", body));
+
+    foreach (var action in notificationActions)
     {
-      _pushSender.SendPush(orderEvent.DeviceToken!, "Order Update", body);
+        action();
     }
   }
 }
