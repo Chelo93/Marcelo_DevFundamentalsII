@@ -6,16 +6,29 @@ public class WeatherCli(IWeatherProvider provider)
 {
   private readonly IWeatherProvider _provider = provider;
 
+  private bool TryValidateArgs(string[] args, out double latitude, out double longitude)
+  {
+    latitude = 0;
+    longitude = 0;
+    if (args.Length == 0) return false;
+
+    var coordinates = args[0].Split(',');
+    if (coordinates.Length != 2) return false;
+
+    return double.TryParse(coordinates[0], out latitude) &&
+           double.TryParse(coordinates[1], out longitude);
+  }
+
   public async Task RunAsync(string[] args)
   {
-    // TODO: Create validator for the args
-    // OPTIONAL: Separate the arguments
-    var coordinates = (args.Length > 0 ? args[0] : "-16.54649,-68.058805").Split(',');
-    // TODO: Validate that coordinates are valid coordinates
-    var latitude = coordinates[0];
-    var longitude = coordinates[1];
-    var temperature = await _provider.GetTodayAsync(latitude, longitude);
+    // Validate arguments
+    if (!TryValidateArgs(args, out double latitude, out double longitude))
+    {
+      Console.WriteLine("Invalid coordinates format. Please use: latitude,longitude");
+      return;
+    }
 
+    var temperature = await _provider.GetTodayAsync(latitude.ToString(), longitude.ToString());
     Console.WriteLine($"Today weather is: {temperature} Celsius");
   }
 }
