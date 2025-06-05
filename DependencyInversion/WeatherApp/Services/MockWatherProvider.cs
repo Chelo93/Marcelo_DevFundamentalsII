@@ -1,7 +1,10 @@
-namespace WeatherApp.Providers;
 using System.Threading.Tasks;
 using WeatherApp.Interfaces;
 using WeatherApp.Services;
+
+namespace WeatherApp.Services;
+
+
 public class MockWeatherProvider : IWeatherProvider
 {
     private readonly HttpService _httpService;
