@@ -1,5 +1,8 @@
 ﻿namespace ShoppingCartSystem;
 
+using ShoppingCartSystem.interfaces;
+using ShoppingCartSystem.services;
+
 public class Program
 {
   static void Main()

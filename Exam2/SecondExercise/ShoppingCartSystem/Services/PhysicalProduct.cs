@@ -1,13 +1,14 @@
-namespace ShoppingCartSystem;
+namespace ShoppingCartSystem.services;
 
-public class PhysicalProduct : IProduct
+using ShoppingCartSystem.interfaces;
+
+public class PhysicalProduct : IPProduct
 {
-  public string Name { get; set; }
+  public string? Name { get; set; }
   public decimal Price { get; set; }
   public int Stock { get; set; }
   public bool IsPhysical => true;
   public decimal Weight { get; set; }
-  public string DownloadUrl { get; set; }
 
   public void Ship()
   {
@@ -27,6 +28,6 @@ public class PhysicalProduct : IProduct
 
   public decimal CalculateShippingCost()
   {
-    return Weight * 2.5m;
+    return Weight * 2.5m; 
   }
 }
