@@ -1,16 +1,9 @@
-namespace  ShoppingCartSystem.Services;
+namespace  ShoppingCartSystem.services;
 
 using System.Collections.Generic;
 using ShoppingCartSystem.interfaces;
 public class ShippingCalculator : IShippingCalculator
 {
-    public ShippingCalculator(List<IPProduct> phisicalItems)
-    {
-        PhisicalItems = phisicalItems;
-    }
-
-    public List<IPProduct> PhisicalItems { get; }
-
     public decimal CalculateShipping(IEnumerable<IPProduct> physicalItems)
     {
         decimal totalShippingCost = 0;

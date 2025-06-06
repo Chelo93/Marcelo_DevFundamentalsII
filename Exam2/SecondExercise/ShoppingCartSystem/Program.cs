@@ -3,11 +3,15 @@
 using ShoppingCartSystem.interfaces;
 using ShoppingCartSystem.services;
 
+
+
 public class Program
 {
   static void Main()
   {
-    var cart = new ShoppingCart();
+    var discountStrategy = new DiscountStrategy(); 
+    var shippingCalculator = new ShippingCalculator(); 
+    var cart = new ShoppingCart(discountStrategy, shippingCalculator);
 
     var laptop = new PhysicalProduct
     {

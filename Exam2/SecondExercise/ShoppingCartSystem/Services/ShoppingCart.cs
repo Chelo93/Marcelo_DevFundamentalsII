@@ -1,14 +1,19 @@
 namespace ShoppingCartSystem.services;
 
 using ShoppingCartSystem.interfaces;
-using ShoppingCartSystem.Services;
 
 public class ShoppingCart
 {
-  //private readonly IDiscountStrategy? discountStrategy;
-  //private readonly IShippingCalculator? shippingCalculator;
+  private readonly IDiscountStrategy? discountStrategy;
+  private readonly IShippingCalculator? shippingCalculator;
   private List<IPProduct> phisicalItems = [];
   private List<IDProduct> digitalItems = [];
+
+    public ShoppingCart(IDiscountStrategy discountStrategy, IShippingCalculator shippingCalculator)
+    {
+        this.discountStrategy = discountStrategy;
+        this.shippingCalculator = shippingCalculator;
+    }
 
   public void AddItem(IPProduct product, int quantity = 1)
   {
@@ -35,10 +40,8 @@ public class ShoppingCart
     decimal subtotalP = phisicalItems.Sum(item => item.Price);
     decimal subtotalD = digitalItems.Sum(item => item.Price);
     decimal subtotal = subtotalP + subtotalD;
-    var shippingCalculator = new ShippingCalculator(phisicalItems);
-    var discountStrategy = new DiscountStrategy(subtotal, phisicalItems, digitalItems);
     decimal shipping = shippingCalculator!.CalculateShipping(phisicalItems);
-    decimal discount = discountStrategy!.CalculateDiscount(subtotal);
+    decimal discount = discountStrategy!.CalculateDiscount(subtotal, phisicalItems, digitalItems);
 
     Console.WriteLine($"\nSutotal: ${subtotal:F2}"); 
     Console.WriteLine($"Shiping: ${shipping:F2}"); 

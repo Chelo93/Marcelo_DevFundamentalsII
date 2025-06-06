@@ -8,18 +8,8 @@ using System;
 public class DiscountStrategy : IDiscountStrategy
 {
     private decimal _discount;
-    private readonly List<IPProduct> _phisicalProducts;
-    private readonly List<IDProduct> _digitalProducts;
 
-
-    public DiscountStrategy(decimal subtotal, List<IPProduct> _phisicalProducts, List<IDProduct> _digitalProducts)
-    {
-        this._phisicalProducts = _phisicalProducts ?? throw new ArgumentNullException(nameof(_phisicalProducts));
-        this._digitalProducts = _digitalProducts ?? throw new ArgumentNullException(nameof(_digitalProducts));
-        CalculateDiscount(subtotal);
-    }
-
-    public decimal CalculateDiscount(decimal subtotal)
+    public decimal CalculateDiscount(decimal subtotal, List<IPProduct>? physicalProducts, List<IDProduct>? digitalProducts)
     {
         _discount = 0;
 
@@ -27,7 +17,7 @@ public class DiscountStrategy : IDiscountStrategy
         {
             _discount = subtotal * 0.1m;
         }
-        if (_phisicalProducts.Count > 5 || _digitalProducts.Count > 5)
+        if (physicalProducts!.Count > 5 || digitalProducts!.Count > 5)
         {
             _discount += 5;
         }
