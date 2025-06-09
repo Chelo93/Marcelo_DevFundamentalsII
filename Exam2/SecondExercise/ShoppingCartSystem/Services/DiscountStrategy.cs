@@ -24,8 +24,4 @@ public class DiscountStrategy : IDiscountStrategy
         return _discount;
     }
 
-    public string GetDescription()
-    {
-        return $"Apply a discount of {_discount}";
-    }
 }

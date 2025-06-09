@@ -12,12 +12,12 @@ public class PhysicalProduct : IPProduct
 
   public void Ship()
   {
+    Console.WriteLine($"Shipping {Name}");
     if (Stock <= 0)
     {
       throw new InvalidOperationException("Product out of stock!");
     }
 
-    Console.WriteLine($"Shipping {Name}");
     Stock--;
   }
 

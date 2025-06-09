@@ -32,7 +32,7 @@ public class Program
     {
       Name = "Wireless Mouse",
       Price = 25,
-      Stock = 10,
+      Stock = 1,
       Weight = 0.2m
     };
 

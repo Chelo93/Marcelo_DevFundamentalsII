@@ -28,7 +28,7 @@ public class DisplayService
     {
         if (_phisicalProducts.Count == 0)
         {
-            Console.WriteLine("No physical products available.");
+            Console.WriteLine("No physical products added to the cart.");
             return;
         }
         
@@ -46,7 +46,7 @@ public class DisplayService
     {
         if (_digitalProducts.Count == 0)
         {
-            Console.WriteLine("No digital products available.");
+            Console.WriteLine("No digital products added to the cart.");
             return;
         }
 

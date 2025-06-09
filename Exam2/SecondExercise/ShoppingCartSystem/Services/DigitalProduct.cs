@@ -7,7 +7,6 @@ public class DigitalProduct : IDProduct
 {
   public string? Name { get; set; }
   public decimal Price { get; set; }
-  public int Stock { get; set; } = int.MaxValue;
   public bool IsPhysical => false;
   public decimal Weight { get; set; }
   public string? DownloadUrl { get; set; }
