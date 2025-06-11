@@ -2,21 +2,24 @@ using CrossPlatform.Interfaces;
 
 namespace CrossPlatform.Components;
 
-// TODO: Complete implement interface
 public sealed class LinuxButton : IButton
 {
-  public void Click()
-  {
-    throw new NotImplementedException();
-  }
+    private readonly string _theme = "LinuxDark";
+    private bool _clicked = false;
 
-  public string GetTheme()
-  {
-    throw new NotImplementedException();
-  }
+    public void Click()
+    {
+        _clicked = true;
+        Console.WriteLine("[LinuxButton] Button clicked!");
+    }
 
-  public void Render()
-  {
-    throw new NotImplementedException();
-  }
+    public string GetTheme()
+    {
+        return _theme;
+    }
+
+    public void Render()
+    {
+        Console.WriteLine($"[LinuxButton] Theme: {_theme}, Clicked: {_clicked}");
+    }
 }

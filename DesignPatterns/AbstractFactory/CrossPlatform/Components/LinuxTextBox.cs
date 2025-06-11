@@ -2,26 +2,28 @@ using CrossPlatform.Interfaces;
 
 namespace CrossPlatform.Components;
 
-// TODO: Complete implement interface
 public sealed class LinuxTextBox : ITextBox
 {
-  public string GetFont()
-  {
-    throw new NotImplementedException();
-  }
+    private string _text = string.Empty;
+    private readonly string _font = "Ubuntu Mono";
 
-  public string GetText()
-  {
-    throw new NotImplementedException();
-  }
+    public string GetFont()
+    {
+        return _font;
+    }
 
-  public void Render()
-  {
-    throw new NotImplementedException();
-  }
+    public string GetText()
+    {
+        return _text;
+    }
 
-  public void SetText(string text)
-  {
-    throw new NotImplementedException();
-  }
+    public void Render()
+    {
+        Console.WriteLine($"[LinuxTextBox] Font: {_font}, Text: {_text}");
+    }
+
+    public void SetText(string text)
+    {
+        _text = text;
+    }
 }
