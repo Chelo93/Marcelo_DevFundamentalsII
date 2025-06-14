@@ -1,12 +1,12 @@
 using ReportGenerationSystem.Interfaces;
 using ReportGenerationSystem.Templates;
+using ReportGenerationSystem.Models;
 
 namespace ReportGenerationSystem.ReportGenerators;
 
 public class UserReportGenerator(IReportFormatStrategy? formatStrategy = null) : ReportGenerator(formatStrategy)
 {
-  protected override string GetReportType() => "User";
-
+  protected override ReportType GetReportType() => ReportType.User;
   protected override string[] FectchData()
   {
     Console.WriteLine("Fetching User data from database...");

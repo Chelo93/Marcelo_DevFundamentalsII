@@ -1,13 +1,14 @@
 using ReportGenerationSystem.Interfaces;
 using ReportGenerationSystem.Templates;
+using ReportGenerationSystem.Models;
 
 namespace ReportGenerationSystem.ReportGenerators;
 
 public class SalesReportGenerator(IReportFormatStrategy? formatStrategy = null) : ReportGenerator(formatStrategy)
 {
-  protected override string GetReportType() => "Sales";
+    protected override ReportType GetReportType() => ReportType.Sales;
 
-  protected override string[] FectchData()
+    protected override string[] FectchData()
   {
     Console.WriteLine("Fetching sales data from database...");
 

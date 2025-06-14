@@ -1,6 +1,7 @@
 using ReportGenerationSystem.Factories;
 using ReportGenerationSystem.ReportGenerators;
 using ReportGenerationSystem.Templates;
+using ReportGenerationSystem.Models;
 
 namespace ReportGenerationSystem.Services;
 
@@ -22,7 +23,7 @@ public class ReportService
   }
 
   // TODO: This should be an enum 'format'
-  public void GenerateAllReportsInFormat(string format)
+  public void GenerateAllReportsInFormat(ReportFormat format)
   {
     var strategy = FormatStrategyFactory.CreateStrategy(format);
 
