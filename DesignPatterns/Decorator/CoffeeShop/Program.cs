@@ -8,17 +8,20 @@ using CoffeeShop.Services;
 var coffeeShop = new CoffeeShopServiceFacade();
 coffeeShop.ShowMenu();
 
+Console.WriteLine("----------");
 ICoffee coffe1 = new Espresso();
 coffe1 = new MilkDecorator(coffe1, "Regular");
 coffe1 = new SugarDecorator(coffe1, 2, "Brown");
-
 var result1 = coffe1.GetDescription();
 Console.WriteLine(result1);
+coffe1.GetIngredients();
+Console.WriteLine($"Total Cost: {coffe1.GetCost():C}");
+
 
 // coffeShop.PrintReceipt(coffe1, "Alberth");
 
 // Builder reduced version
-
+Console.WriteLine("----------");
 var coffe2 = new CoffeeOrderBuilder(coffeeShop.CreateCustomCoffee("Americano"))
   .WithMilk()
   //.WithSugar(packets: 3)
@@ -30,6 +33,8 @@ var result2 = coffe2.GetDescription();
 coffe2 = new SugarDecorator(coffe2, 2, "White");
 
 Console.WriteLine(result2);
+coffe2.GetIngredients();
+Console.WriteLine($"Total Cost: {coffe2.GetCost():C}");
 
 /*
 BENEFITS OF DECORATOR PATTERN:

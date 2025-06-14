@@ -12,5 +12,6 @@ public abstract class CoffeeDecorator(ICoffee coffee) : ICoffee
   public virtual decimal GetCost() => _coffee.GetCost();
   public virtual int GetCalories() => _coffee.GetCalories();
   public virtual string GetSize() => _coffee.GetSize();
-  public virtual List<string> GetIngredients() => _coffee.GetIngredients();
+  public virtual void GetIngredients() => _coffee.GetIngredients(); 
+
 }

@@ -36,11 +36,10 @@ public class MilkDecorator(ICoffee coffee, string milkType) : CoffeeDecorator(co
     return _coffee.GetCalories() + _additionalCalories;
   }
 
-  public override List<string> GetIngredients()
+  public override void GetIngredients()
   {
-    var ingredients = _coffee.GetIngredients();
-    ingredients.Add($"{_milkType} Milk");
-
-    return ingredients;
+    _coffee.GetIngredients();
+    //$"{Name} ({Quantity}{Unit}) - {Calories} cal, ${Cost:0.00}";
+    Console.WriteLine($"{_milkType} Milk -  {_additionalCalories} cal, {_additionalCost:C}");
   }
 }

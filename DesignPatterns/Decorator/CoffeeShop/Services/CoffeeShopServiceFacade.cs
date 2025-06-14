@@ -41,4 +41,20 @@ public class CoffeeShopServiceFacade
   }
 
   // TODO: PRINT RECEIPT with Order, Size, Total Cost, Total calories (optional, ingredients)
+
+      public static void PrintReceipt(ICoffee coffe, bool showIngredients = false)
+    {
+        Console.WriteLine("----- RECEIPT -----");
+        Console.WriteLine($"Order: {coffe.GetDescription()}");
+        Console.WriteLine($"Size: {coffe.GetSize}");
+        Console.WriteLine($"Total Cost: ${coffe.GetCost():0.00}");
+        Console.WriteLine($"Total Calories: {coffe.GetCalories}");
+
+        if (showIngredients)
+        {
+            Console.WriteLine("Ingredients:");
+            coffe.GetIngredients();
+        }
+        Console.WriteLine("-------------------");
+    }
 }

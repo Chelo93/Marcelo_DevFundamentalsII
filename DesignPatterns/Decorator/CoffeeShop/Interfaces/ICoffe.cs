@@ -8,5 +8,6 @@ public interface ICoffee
   int GetCalories();
   string GetSize();
   // TODO: Change to ingredient class (add all the properties that you think are needed)
-  List<string> GetIngredients();
+  void  GetIngredients();
+
 }

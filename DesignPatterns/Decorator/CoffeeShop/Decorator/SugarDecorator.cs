@@ -7,6 +7,13 @@ public class SugarDecorator(ICoffee coffee, int packets, string sugarType) : Cof
 {
   private readonly int _packets = packets;
   private readonly string _sugarType = sugarType;
+  private decimal _costPerPacket = sugarType.ToLower() switch
+  {
+    "white" => 0.30m,
+    "brown" => 0.40m,
+    "stevia" => 0.50m,
+    _ => 0.30m
+  };
 
   public override string GetDescription()
   {
@@ -17,15 +24,7 @@ public class SugarDecorator(ICoffee coffee, int packets, string sugarType) : Cof
 
   public override decimal GetCost()
   {
-    var costPerPacket = _sugarType.ToLower() switch
-    {
-      "white" => 0.30m,
-      "brown" => 0.40m,
-      "stevia" => 0.50m,
-      _ => 0.30m
-    };
-
-    return _coffee.GetCost() + (costPerPacket * _packets);
+    return _coffee.GetCost() + (_costPerPacket * _packets);
   }
 
   public override int GetCalories()
@@ -41,11 +40,12 @@ public class SugarDecorator(ICoffee coffee, int packets, string sugarType) : Cof
     return _coffee.GetCalories() + (caloriesPerPacket * _packets);
   }
 
-  public override List<string> GetIngredients()
+  public override void GetIngredients()
   {
-    var ingredients = _coffee.GetIngredients();
-    ingredients.Add($"{_sugarType} Sugar ({_packets}x)");
-
-    return ingredients;
+    _coffee.GetIngredients();
+    var packetText = _packets == 1 ? "packet" : "packets";
+    //$"{Name} ({Quantity}{Unit}) - {Calories} cal, ${Cost:0.00}";
+    Console.WriteLine($"{_sugarType} Sugar ({_packets} {packetText}) - {GetCalories()} cal, {_costPerPacket*_packets:C}");
   }
+
 }
